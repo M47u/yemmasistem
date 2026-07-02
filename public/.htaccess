@@ -1,0 +1,14 @@
+RewriteEngine On
+
+# Manifest: siempre servido por PHP (paths dinámicos según entorno)
+RewriteRule ^manifest\.json$ index.php [L,QSA]
+
+# Íconos: si existe el archivo estático lo sirve directo;
+# si no existe, PHP lo genera con GD como fallback
+RewriteCond %{REQUEST_FILENAME} !-f
+RewriteRule ^icons/icon-(.+)\.png$ index.php [L,QSA]
+
+# Todo lo demás: pasar por PHP solo si no es archivo/directorio real
+RewriteCond %{REQUEST_FILENAME} !-f
+RewriteCond %{REQUEST_FILENAME} !-d
+RewriteRule ^ index.php [L]

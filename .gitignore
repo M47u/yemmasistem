@@ -1,0 +1,6 @@
+.env
+/storage/logs/*.log
+/storage/cache/*.php
+/public/uploads/*
+!/public/uploads/.gitkeep
+control-de-pagos-2-2.html

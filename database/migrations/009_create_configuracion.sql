@@ -1,0 +1,7 @@
+CREATE TABLE IF NOT EXISTS configuracion (
+    clave       VARCHAR(60)  NOT NULL,
+    valor       TEXT         DEFAULT NULL,
+    descripcion VARCHAR(200) DEFAULT NULL,
+    updated_at  TIMESTAMP    NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+    PRIMARY KEY (clave)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;

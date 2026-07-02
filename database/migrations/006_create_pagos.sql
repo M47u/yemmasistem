@@ -1,0 +1,21 @@
+CREATE TABLE IF NOT EXISTS pagos (
+    id               INT UNSIGNED     NOT NULL AUTO_INCREMENT,
+    cliente_id       INT UNSIGNED     NOT NULL,
+    periodo_año      SMALLINT UNSIGNED NOT NULL,
+    periodo_mes      TINYINT UNSIGNED  NOT NULL,
+    fecha_pago       DATE              NOT NULL,
+    importe          DECIMAL(10,2)     NOT NULL,
+    metodo_pago_id   TINYINT UNSIGNED  DEFAULT NULL,
+    usuario_id       INT UNSIGNED      DEFAULT NULL,
+    observaciones    TEXT              DEFAULT NULL,
+    comprobante_path VARCHAR(255)      DEFAULT NULL,
+    created_at       TIMESTAMP         NOT NULL DEFAULT CURRENT_TIMESTAMP,
+    PRIMARY KEY (id),
+    UNIQUE KEY uq_pago_periodo (cliente_id, periodo_año, periodo_mes),
+    KEY idx_pagos_cliente  (cliente_id),
+    KEY idx_pagos_periodo  (periodo_año, periodo_mes),
+    KEY idx_pagos_fecha    (fecha_pago),
+    CONSTRAINT fk_pagos_cliente   FOREIGN KEY (cliente_id)     REFERENCES clientes     (id),
+    CONSTRAINT fk_pagos_metodo    FOREIGN KEY (metodo_pago_id) REFERENCES metodos_pago (id) ON DELETE SET NULL,
+    CONSTRAINT fk_pagos_usuario   FOREIGN KEY (usuario_id)     REFERENCES usuarios     (id) ON DELETE SET NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;

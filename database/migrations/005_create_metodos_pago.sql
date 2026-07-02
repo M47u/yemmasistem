@@ -1,0 +1,6 @@
+CREATE TABLE IF NOT EXISTS metodos_pago (
+    id     TINYINT UNSIGNED NOT NULL AUTO_INCREMENT,
+    nombre VARCHAR(40)      NOT NULL,
+    activo TINYINT(1)       NOT NULL DEFAULT 1,
+    PRIMARY KEY (id)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;

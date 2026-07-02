@@ -1,0 +1,8 @@
+CREATE TABLE IF NOT EXISTS roles (
+    id          TINYINT UNSIGNED NOT NULL AUTO_INCREMENT,
+    nombre      VARCHAR(30)  NOT NULL,
+    descripcion VARCHAR(100) DEFAULT NULL,
+    created_at  TIMESTAMP    NOT NULL DEFAULT CURRENT_TIMESTAMP,
+    PRIMARY KEY (id),
+    UNIQUE KEY uq_roles_nombre (nombre)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;

@@ -1,0 +1,454 @@
+/* ===================================================
+   YEMMA ISP — Componentes de la pantalla de clientes
+   =================================================== */
+
+/* ===================================================
+   Header de la pantalla de clientes
+   =================================================== */
+
+.clientes-screen {
+    padding-bottom: .5rem;
+}
+
+.screen-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 14px;
+}
+
+.header-brand {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.brand-icon { width: 32px; height: 32px; }
+
+.brand-name {
+    font-family: var(--font-display);
+    font-size: 1.1rem;
+    color: var(--navy);
+}
+
+/* ===================================================
+   Barra de mes
+   =================================================== */
+
+.month-bar {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 12px;
+    background: var(--surface);
+    border-radius: var(--radius-md);
+    padding: 10px 14px;
+    box-shadow: var(--shadow-sm);
+    margin-bottom: 10px;
+}
+
+.month-arrow {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 36px;
+    height: 36px;
+    font-size: 1.4rem;
+    color: var(--navy);
+    background: none;
+    border: none;
+    border-radius: 50%;
+    line-height: 1;
+    transition: background .12s;
+    -webkit-tap-highlight-color: transparent;
+}
+
+.month-arrow:active { background: rgba(13, 74, 119, 0.08); }
+
+.month-label {
+    flex: 1;
+    text-align: center;
+    font-family: var(--font-mono);
+    font-weight: 600;
+    font-size: .95rem;
+    color: var(--ink);
+    text-transform: capitalize;
+    min-width: 140px;
+    display: block;
+    line-height: 1;
+}
+
+.month-label.current { color: var(--navy); }
+
+/* ===================================================
+   Barra de resumen
+   =================================================== */
+
+.summary-bar {
+    display: flex;
+    align-items: center;
+    justify-content: space-around;
+    background: var(--surface);
+    border-radius: var(--radius-md);
+    padding: 12px 8px;
+    box-shadow: var(--shadow-sm);
+    margin-bottom: 12px;
+}
+
+.summary-item { text-align: center; }
+
+.summary-num {
+    display: block;
+    font-family: var(--font-mono);
+    font-weight: 700;
+    font-size: .95rem;
+    color: var(--ink);
+}
+
+.summary-num.green { color: var(--paid); }
+.summary-num.warn  { color: var(--warn); }
+
+.summary-label {
+    display: block;
+    font-size: 0.62rem;
+    color: var(--muted);
+    text-transform: uppercase;
+    letter-spacing: .5px;
+    margin-top: 2px;
+}
+
+.summary-divider {
+    width: 1px;
+    height: 30px;
+    background: var(--line);
+}
+
+/* ===================================================
+   Buscador
+   =================================================== */
+
+.search-input {
+    width: 100%;
+    padding: 11px 14px;
+    border: 1.5px solid var(--line);
+    border-radius: var(--radius-sm);
+    font-size: .92rem;
+    background: var(--surface);
+    color: var(--ink);
+    outline: none;
+    margin-bottom: 10px;
+    transition: border-color .15s, box-shadow .15s;
+    -webkit-appearance: none;
+}
+
+.search-input:focus {
+    border-color: var(--navy);
+    box-shadow: 0 0 0 3px rgba(13, 74, 119, 0.1);
+}
+
+.search-input::placeholder { color: var(--muted); }
+
+/* ===================================================
+   Filtros
+   =================================================== */
+
+.filter-row {
+    display: flex;
+    gap: 6px;
+    margin-bottom: 12px;
+    overflow-x: auto;
+    padding-bottom: 2px;
+    -webkit-overflow-scrolling: touch;
+    scrollbar-width: none;
+}
+
+.filter-row::-webkit-scrollbar { display: none; }
+
+.filter-btn {
+    flex-shrink: 0;
+    padding: 7px 14px;
+    border-radius: 999px;
+    border: 1.5px solid var(--line);
+    background: var(--surface);
+    color: var(--muted);
+    font-size: 0.76rem;
+    font-weight: 600;
+    white-space: nowrap;
+    transition: all .15s ease;
+    min-height: 34px;
+}
+
+.filter-btn.active {
+    background: var(--navy);
+    border-color: var(--navy);
+    color: #fff;
+}
+
+/* ===================================================
+   Lista de clientes
+   =================================================== */
+
+.client-list {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+}
+
+.list-empty {
+    text-align: center;
+    padding: 3rem 1rem;
+    color: var(--muted);
+    font-size: .88rem;
+}
+
+.btn-add-first {
+    margin-top: 1rem;
+    padding: 12px 24px;
+    background: var(--navy);
+    color: #fff;
+    border: none;
+    border-radius: var(--radius-sm);
+    font-weight: 700;
+    font-size: .9rem;
+}
+
+/* Card de cliente */
+.client-card {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    background: var(--surface);
+    border-radius: var(--radius-md);
+    padding: 12px 14px;
+    box-shadow: var(--shadow-sm);
+    gap: 10px;
+    animation: fadeSlide .18s ease both;
+    border-left: 3px solid transparent;
+    transition: border-color .15s;
+}
+
+.client-card.card-suspendido { border-left-color: var(--warn); }
+.client-card.card-baja       { opacity: .55; border-left-color: var(--muted); }
+
+.client-card[data-hidden="true"] { display: none; }
+
+@keyframes fadeSlide {
+    from { opacity: 0; transform: translateY(6px); }
+    to   { opacity: 1; transform: translateY(0); }
+}
+
+.card-info {
+    flex: 1;
+    min-width: 0;
+    cursor: pointer;
+    -webkit-tap-highlight-color: transparent;
+}
+
+.card-name {
+    font-weight: 600;
+    font-size: .91rem;
+    color: var(--ink);
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    display: flex;
+    align-items: center;
+    gap: 6px;
+}
+
+.badge-suspended {
+    font-size: 0.58rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: .4px;
+    color: var(--warn);
+    background: var(--warn-bg);
+    padding: 2px 6px;
+    border-radius: 999px;
+    border: 1px solid rgba(217, 91, 42, .25);
+    white-space: nowrap;
+    flex-shrink: 0;
+}
+
+.card-meta {
+    font-size: 0.74rem;
+    color: var(--muted);
+    margin-top: 2px;
+    font-family: var(--font-mono);
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+.card-actions {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    flex-shrink: 0;
+}
+
+/* Stamp */
+.stamp {
+    border-radius: 999px;
+    padding: 6px 12px;
+    font-family: var(--font-display);
+    font-size: .64rem;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+    background: transparent;
+    cursor: pointer;
+    transition: transform .12s ease, opacity .12s;
+    -webkit-tap-highlight-color: transparent;
+    min-height: 34px;
+    display: flex;
+    align-items: center;
+}
+
+.stamp.pending {
+    border: 2px dashed var(--line);
+    color: var(--muted);
+}
+
+.stamp.paid {
+    border: 2px solid var(--paid);
+    color: var(--paid);
+    background: var(--paid-bg);
+    transform: rotate(-3deg);
+    box-shadow: inset 0 0 0 1px var(--paid);
+}
+
+.stamp:active {
+    opacity: .7;
+    transform: scale(.94);
+}
+
+.stamp.paid:active {
+    transform: rotate(-3deg) scale(.94);
+}
+
+.stamp.loading {
+    opacity: .5;
+    pointer-events: none;
+}
+
+.stamp-readonly {
+    border-radius: 999px;
+    padding: 6px 12px;
+    font-family: var(--font-display);
+    font-size: .64rem;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+}
+
+.stamp-readonly.pending { border: 2px dashed var(--line); color: var(--muted); }
+.stamp-readonly.paid    { border: 2px solid var(--paid); color: var(--paid); transform: rotate(-3deg); display: inline-block; }
+
+/* ===================================================
+   Historial de pagos (bottom sheet del cliente)
+   =================================================== */
+
+.section-sep {
+    height: 1px;
+    background: var(--line);
+    margin: 1.25rem 0;
+}
+
+.historial-title {
+    font-size: 0.72rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: .5px;
+    color: var(--muted);
+    margin-bottom: .75rem;
+}
+
+.historial-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 8px;
+}
+
+.historial-mes {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 3px;
+    padding: 8px 4px;
+    border-radius: var(--radius-sm);
+    border: 1.5px solid var(--line);
+    background: #fff;
+    cursor: default;
+    transition: border-color .12s;
+}
+
+.historial-mes.pagado {
+    border-color: var(--paid);
+    background: var(--paid-bg);
+}
+
+.historial-mes.sin-info {
+    opacity: .4;
+}
+
+.historial-mes-label {
+    font-size: 0.6rem;
+    font-family: var(--font-mono);
+    color: var(--muted);
+    text-transform: uppercase;
+    text-align: center;
+}
+
+.historial-mes-icon {
+    font-size: 1rem;
+    line-height: 1;
+}
+
+/* ===================================================
+   Métodos de pago (modal pago)
+   =================================================== */
+
+.metodos-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 8px;
+    margin-bottom: .5rem;
+}
+
+.metodo-btn {
+    padding: 10px 8px;
+    border-radius: var(--radius-sm);
+    border: 1.5px solid var(--line);
+    background: #fff;
+    color: var(--muted);
+    font-size: .78rem;
+    font-weight: 600;
+    text-align: center;
+    transition: all .12s;
+    min-height: 42px;
+}
+
+.metodo-btn.active {
+    border-color: var(--navy);
+    background: var(--navy);
+    color: #fff;
+}
+
+/* ===================================================
+   Form grid
+   =================================================== */
+
+.form-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 0 12px;
+}
+
+.form-grid .full-width { grid-column: 1 / -1; }
+
+/* En móvil muy pequeño, una sola columna */
+@media (max-width: 360px) {
+    .form-grid { grid-template-columns: 1fr; }
+    .form-grid .full-width { grid-column: 1; }
+    .historial-grid { grid-template-columns: repeat(3, 1fr); }
+    .metodos-grid { grid-template-columns: repeat(2, 1fr); }
+}
